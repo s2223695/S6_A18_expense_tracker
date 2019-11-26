@@ -2,8 +2,13 @@
 const express = require('express')
 const route = express.Router()
 
+const Record = require('../models/record').Record
+
 route.get('/', (req, res) => {
-  res.send('record')
+  Record.find((err, records) => {
+    if (err) console.error(err)
+    res.render('index', { records })
+  })
 })
 
 route.get('/new', (req, res) => {

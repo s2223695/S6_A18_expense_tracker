@@ -1,1 +1,19 @@
-<h2>Index</h2>
+<a href="/records/new">Create</a>
+
+<ul>
+  {{#each records}}
+  <li>
+    <div style="display: inline-block;">
+      <h3>{{this.name}}</h3>
+      <p>{{this.date}}</p>
+    </div>
+    <div style="display: inline-block;">
+      <h3>{{this.amount}}</h3>
+    </div>
+    <a href="/records/{{this.id}}/edit" class="">Edit</a>
+    <form action="/records/{{this.id}}/delete" method="post" style="display: inline-block;">
+      <button type="submit">Delete</button>
+    </form>
+  </li>
+  {{/each}}
+</ul>
