@@ -12,11 +12,22 @@ route.get('/', (req, res) => {
 })
 
 route.get('/new', (req, res) => {
-  res.send('new record')
+  const record = req.body
+  res.render('new')
 })
 
 route.post('/new', (req, res) => {
-  res.send('post new record')
+  const record = new Record({
+    name: req.body.name,
+    category: req.body.category,
+    date: req.body.date,
+    amount: req.body.amount,
+    totalAmount: req.body.amount
+  })
+  record.save(err => {
+    if (err) console.error(err)
+    res.redirect('/')
+  })
 })
 
 route.get('/:id/edit', (req, res) => {
