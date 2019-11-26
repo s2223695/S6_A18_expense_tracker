@@ -1,10 +1,15 @@
 // Include modules
 const express = require('express')
 const app = express()
+const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 
 // Define server variables
 const port = 3000
+
+// Setting express-handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
 
 // Setting database
 mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
