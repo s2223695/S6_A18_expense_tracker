@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const port = 3000
 
 // Setting database
-mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
 
 db.on('error', () => {
@@ -22,6 +22,7 @@ const Record = require('./models/record').Record
 
 // Setting route middleware
 app.use('/', require('./routes/home'))
+app.use('/records', require('./routes/record'))
 
 // Start listening on port
 app.listen(port, () => {
