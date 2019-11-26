@@ -18,7 +18,7 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-const Record = require('./models/record')
+const Record = require('./models/record').Record
 
 // Setting route middleware
 app.use('/', require('./routes/home'))

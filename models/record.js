@@ -1,6 +1,7 @@
 // Include modules
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const enumCategory = ['household', 'traffic', 'entertainment', 'food', 'other']
 
 const recordSchema = new Schema({
   name: {
@@ -8,7 +9,8 @@ const recordSchema = new Schema({
     required: true
   },
   category: {
-    type: Number,
+    type: String,
+    enum: enumCategory,
     required: true
   },
   date: {
@@ -25,4 +27,5 @@ const recordSchema = new Schema({
   },
 })
 
-module.exports = mongoose.model('Record', recordSchema)
+module.exports.Record = mongoose.model('Record', recordSchema)
+module.exports.enumCategory = enumCategory
