@@ -1,0 +1,46 @@
+{
+  "dataList": [
+    {
+      "name": "shampoo",
+      "category": "household",
+      "data": "2019-11-26",
+      "amount": 120,
+      "totalAmount": 120
+    },
+    {
+      "name": "taxi",
+      "category": "traffic",
+      "data": "2019-11-26",
+      "amount": 600,
+      "totalAmount": 600
+    },
+    {
+      "name": "cookie",
+      "category": "food",
+      "data": "2019-11-26",
+      "amount": 50,
+      "totalAmount": 50
+    },
+    {
+      "name": "movie ticket",
+      "category": "entertainment",
+      "data": "2019-11-26",
+      "amount": 200,
+      "totalAmount": 200
+    },
+    {
+      "name": "popcorn",
+      "category": "food",
+      "data": "2019-11-26",
+      "amount": 80,
+      "totalAmount": 80
+    },
+    {
+      "name": "donate",
+      "category": "other",
+      "data": "2019-11-26",
+      "amount": 1000,
+      "totalAmount": 1000
+    }
+  ]
+}
