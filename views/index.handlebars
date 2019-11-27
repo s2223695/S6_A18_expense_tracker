@@ -11,7 +11,7 @@
       <h3>{{this.amount}}</h3>
     </div>
     <a href="/records/{{this.id}}/edit" class="">Edit</a>
-    <form action="/records/{{this.id}}/delete" method="post" style="display: inline-block;">
+    <form action="/records/{{this.id}}/delete?_method=DELETE" method="post" style="display: inline-block;">
       <button type="submit">Delete</button>
     </form>
   </li>

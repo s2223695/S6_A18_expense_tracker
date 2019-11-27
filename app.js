@@ -4,6 +4,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 // Define server variables
 const port = 3000
@@ -26,6 +27,9 @@ app.set('view engine', 'handlebars')
 
 // Setting body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// Setting method-override
+app.use(methodOverride('_method'))
 
 const Record = require('./models/record').Record
 

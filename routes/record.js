@@ -37,7 +37,7 @@ route.get('/:id/edit', (req, res) => {
   })
 })
 
-route.post('/:id/edit', (req, res) => {
+route.put('/:id', (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
@@ -52,7 +52,7 @@ route.post('/:id/edit', (req, res) => {
   })
 })
 
-route.post('/:id/delete', (req, res) => {
+route.delete('/:id/delete', (req, res) => {
   Record.findByIdAndDelete(req.params.id, (err, record) => {
     if (err) return console.error(err)
     res.redirect('/')
