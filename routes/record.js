@@ -25,17 +25,31 @@ route.post('/new', (req, res) => {
     totalAmount: req.body.amount
   })
   record.save(err => {
-    if (err) console.error(err)
+    if (err) return console.error(err)
     res.redirect('/')
   })
 })
 
 route.get('/:id/edit', (req, res) => {
-  res.send('edit record')
+  Record.findById(req.params.id, (err, record) => {
+    if (err) return console.error(err)
+    res.render('edit', { record })
+  })
 })
 
 route.post('/:id/edit', (req, res) => {
-  res.send('post edit record')
+  Record.findById(req.params.id, (err, record) => {
+    if (err) return console.error(err)
+    record.name = req.body.name
+    record.date = req.body.date
+    record.category = req.body.category
+    record.amount = req.body.amount
+    record.totalAmount = req.body.amount
+    record.save(err => {
+      if (err) return console.error(err)
+      res.redirect('/')
+    })
+  })
 })
 
 route.post('/:id/delete', (req, res) => {
