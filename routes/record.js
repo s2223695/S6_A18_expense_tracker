@@ -53,7 +53,10 @@ route.post('/:id/edit', (req, res) => {
 })
 
 route.post('/:id/delete', (req, res) => {
-  res.send('delete record')
+  Record.findByIdAndDelete(req.params.id, (err, record) => {
+    if (err) return console.error(err)
+    res.redirect('/')
+  })
 })
 
 module.exports = route
