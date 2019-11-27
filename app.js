@@ -36,6 +36,7 @@ const Record = require('./models/record').Record
 // Setting route middleware
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
+app.use('/auth', require('./routes/auths'))
 
 // Start listening on port
 app.listen(port, () => {
