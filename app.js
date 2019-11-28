@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const passport = require('passport')
 
 // Define server variables
 const port = 3000
@@ -38,6 +39,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+// Setting passport
+app.use(passport.initialize())
+app.use(passport.session())
+require('./config/passport')(passport)
 
 // Setting route middleware
 app.use('/', require('./routes/home'))
