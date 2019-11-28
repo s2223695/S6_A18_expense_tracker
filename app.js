@@ -11,6 +11,11 @@ const passport = require('passport')
 // Define server variables
 const port = 3000
 
+// Setting environment
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 // Setting database
 mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
@@ -56,6 +61,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
 app.use('/users', require('./routes/user'))
+app.use('/auth', require('./routes/auths'))
 
 // Start listening on port
 app.listen(port, () => {
