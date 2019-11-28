@@ -48,7 +48,8 @@ router.post('/login', (req, res, next) => {
 })
 
 router.get('/logout', (req, res) => {
-  res.send('logout')
+  req.logout()
+  res.redirect('/users/login')
 })
 
 module.exports = router
