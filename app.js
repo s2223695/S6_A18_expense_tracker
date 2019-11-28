@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 // Define server variables
 const port = 3000
@@ -31,7 +32,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Setting method-override
 app.use(methodOverride('_method'))
 
-const Record = require('./models/record').Record
+// Setting express-session
+app.use(session({
+  secret: 'jaoisgjoiroieaoie',
+  resave: false,
+  saveUninitialized: true
+}))
 
 // Setting route middleware
 app.use('/', require('./routes/home'))
