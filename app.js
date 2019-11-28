@@ -45,6 +45,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 require('./config/passport')(passport)
 
+// Setting res local variables
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()
+  next()
+})
+
 // Setting route middleware
 app.use('/', require('./routes/home'))
 app.use('/records', require('./routes/record'))
