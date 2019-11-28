@@ -1,22 +1,24 @@
 // Include modules
 const express = require('express')
 const route = express.Router()
+const { authenticated } = require('../config/auth')
 
+// Import models
 const Record = require('../models/record').Record
 
-route.get('/', (req, res) => {
+route.get('/', authenticated, (req, res) => {
   Record.find((err, records) => {
     if (err) console.error(err)
     res.render('index', { records })
   })
 })
 
-route.get('/new', (req, res) => {
+route.get('/new', authenticated, (req, res) => {
   const record = req.body
   res.render('new')
 })
 
-route.post('/new', (req, res) => {
+route.post('/new', authenticated, (req, res) => {
   const record = new Record({
     name: req.body.name,
     category: req.body.category,
@@ -30,14 +32,14 @@ route.post('/new', (req, res) => {
   })
 })
 
-route.get('/:id/edit', (req, res) => {
+route.get('/:id/edit', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     res.render('edit', { record })
   })
 })
 
-route.put('/:id', (req, res) => {
+route.put('/:id', authenticated, (req, res) => {
   Record.findById(req.params.id, (err, record) => {
     if (err) return console.error(err)
     record.name = req.body.name
@@ -52,7 +54,7 @@ route.put('/:id', (req, res) => {
   })
 })
 
-route.delete('/:id/delete', (req, res) => {
+route.delete('/:id/delete', authenticated, (req, res) => {
   Record.findByIdAndDelete(req.params.id, (err, record) => {
     if (err) return console.error(err)
     res.redirect('/')
