@@ -16,7 +16,6 @@ route.get('/', authenticated, (req, res) => {
 })
 
 route.get('/new', authenticated, (req, res) => {
-  const record = req.body
   res.render('new')
 })
 
