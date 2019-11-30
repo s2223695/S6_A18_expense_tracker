@@ -11,11 +11,13 @@ route.get('/', authenticated, (req, res) => {
     .sort({ name: 'asc' })
     .exec((err, records) => {
       if (err) console.error(err)
+      let totalAmount = 0
       formatedRecords = records.map(record => {
         record.icon = categoryInfo[record.category].icon
+        totalAmount += record.totalAmount
         return record
       })
-      res.render('index', { records: formatedRecords })
+      res.render('index', { totalAmount, records: formatedRecords })
     })
 })
 
