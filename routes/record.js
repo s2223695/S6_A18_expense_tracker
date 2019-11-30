@@ -4,19 +4,23 @@ const route = express.Router()
 const { authenticated } = require('../config/auth')
 
 // Import models
-const Record = require('../models/record').Record
+const { Record, categoryInfo } = require('../models/record')
 
 route.get('/', authenticated, (req, res) => {
   Record.find({ userId: req.user._id })
     .sort({ name: 'asc' })
     .exec((err, records) => {
       if (err) console.error(err)
-      res.render('index', { records })
+      formatedRecords = records.map(record => {
+        record.icon = categoryInfo[record.category].icon
+        return record
+      })
+      res.render('index', { records: formatedRecords })
     })
 })
 
 route.get('/new', authenticated, (req, res) => {
-  res.render('new')
+  res.render('new', { categoryInfo })
 })
 
 route.post('/new', authenticated, (req, res) => {
@@ -37,7 +41,9 @@ route.post('/new', authenticated, (req, res) => {
 route.get('/:id/edit', authenticated, (req, res) => {
   Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
     if (err) return console.error(err)
-    res.render('edit', { record })
+    let category = JSON.parse(JSON.stringify(categoryInfo))
+    category[record.category].selected = true
+    res.render('edit', { category, record })
   })
 })
 

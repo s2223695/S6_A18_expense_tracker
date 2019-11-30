@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
+const helpers = require('handlebars-helpers')(exphbs)
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')

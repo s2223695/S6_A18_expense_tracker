@@ -1,7 +1,6 @@
 // Include modules
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const enumCategory = ['household', 'traffic', 'entertainment', 'food', 'other']
 const categoryInfo = {
   household: {
     label: '居家物業',
@@ -24,6 +23,7 @@ const categoryInfo = {
     icon: 'fa-pen'
   }
 }
+const enumCategory = Object.keys(categoryInfo)
 
 const recordSchema = new Schema({
   name: {

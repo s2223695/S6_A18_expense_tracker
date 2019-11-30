@@ -19,11 +19,9 @@
           <label class="input-group-text" for="category">類別*</label>
         </div>
         <select class="custom-select" name="category" id="category">
-          <option value="household" selected>居家物業</option>
-          <option value="traffic">交通出行</option>
-          <option value="entertainment">休閒娛樂</option>
-          <option value="food">餐飲食品</option>
-          <option value="other">其他</option>
+          {{#each category}}
+          <option value="{{@key}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+          {{/each}}
         </select>
       </div>
       <div class="input-group mb-3">
