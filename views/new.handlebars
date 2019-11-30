@@ -1,26 +1,27 @@
 <div class="card">
   <h2 class="card-title text-center">請輸入你的支出</h2>
   <div class="card-body">
+    {{> messages}}
     <form action="/records/new" method="post">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text" for="name">名稱*</label>
         </div>
-        <input type="text" name="name" id="name" class="form-control" required>
+        <input type="text" name="name" id="name" class="form-control" value="{{record.name}}" required>
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text" for="date">日期*</label>
         </div>
-        <input type="date" name="date" id="date" class="form-control" required>
+        <input type="date" name="date" id="date" class="form-control" value="{{record.date}}" required>
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text" for="category">類別*</label>
         </div>
         <select class="custom-select" name="category" id="category">
-          {{#each categoryInfo}}
-          <option value="{{@key}}">{{this.label}}</option>
+          {{#each category}}
+          <option value="{{@key}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
           {{/each}}
         </select>
       </div>
@@ -28,7 +29,7 @@
         <div class="input-group-prepend">
           <label class="input-group-text" for="amount">金額*</label>
         </div>
-        <input type="number" name="amount" id="amount" class="form-control" required>
+        <input type="number" name="amount" id="amount" class="form-control" value="{{record.amount}}" required>
       </div>
 
       <div class="row justify-content-center">

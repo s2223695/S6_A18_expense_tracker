@@ -1,6 +1,7 @@
 <div class="card">
   <h2 class="card-title text-center">請修改你的支出</h2>
   <div class="card-body">
+    {{> messages}}
     <form action="/records/{{record.id}}?_method=PUT" method="post">
       <div class="input-group mb-3">
         <div class="input-group-prepend">

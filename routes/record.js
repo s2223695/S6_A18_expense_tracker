@@ -6,6 +6,18 @@ const { authenticated } = require('../config/auth')
 // Import models
 const { Record, categoryInfo } = require('../models/record')
 
+function checkRecordInput(recordInput, errors) {
+  if (!recordInput.name || !recordInput.date || !recordInput.category || !recordInput.amount) {
+    errors.push({ message: '請輸入必填欄位' })
+  }
+  if (isNaN(recordInput.amount)) {
+    errors.push({ message: '金額須為數字' })
+  }
+  if (Number(recordInput.amount) < 0) {
+    errors.push({ message: '金額須大於零' })
+  }
+}
+
 route.get('/', authenticated, (req, res) => {
   let filterCategory = req.query.filter
 
@@ -37,22 +49,33 @@ route.get('/', authenticated, (req, res) => {
 })
 
 route.get('/new', authenticated, (req, res) => {
-  res.render('new', { categoryInfo })
+  res.render('new', { category: categoryInfo })
 })
 
 route.post('/new', authenticated, (req, res) => {
-  const record = new Record({
-    name: req.body.name,
-    category: req.body.category,
-    date: req.body.date,
-    amount: req.body.amount,
-    totalAmount: req.body.amount,
-    userId: req.user._id
-  })
-  record.save(err => {
-    if (err) return console.error(err)
-    res.redirect('/')
-  })
+  let recordInput = req.body
+
+  let errors = []
+  checkRecordInput(recordInput, errors)
+
+  if (errors.length > 0) {
+    let category = JSON.parse(JSON.stringify(categoryInfo))
+    category[recordInput.category].selected = true
+    res.render('new', { errors, category, record: recordInput })
+  } else {
+    const record = new Record({
+      name: recordInput.name,
+      category: recordInput.category,
+      date: recordInput.date,
+      amount: recordInput.amount,
+      totalAmount: recordInput.amount,
+      userId: req.user._id
+    })
+    record.save(err => {
+      if (err) return console.error(err)
+      res.redirect('/')
+    })
+  }
 })
 
 route.get('/:id/edit', authenticated, (req, res) => {
@@ -65,19 +88,25 @@ route.get('/:id/edit', authenticated, (req, res) => {
 })
 
 route.put('/:id', authenticated, (req, res) => {
-  Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
-    if (err) return console.error(err)
-    record.name = req.body.name
-    record.date = req.body.date
-    record.category = req.body.category
-    record.amount = req.body.amount
-    record.totalAmount = req.body.amount
-    record.userId = req.user._id
-    record.save(err => {
+  let recordInput = req.body
+
+  let errors = []
+  checkRecordInput(recordInput, errors)
+
+  if (errors.length > 0) {
+    let category = JSON.parse(JSON.stringify(categoryInfo))
+    category[recordInput.category].selected = true
+    res.render('edit', { errors, category, record: recordInput })
+  } else {
+    Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
       if (err) return console.error(err)
-      res.redirect('/')
+      Object.assign(record, recordInput)
+      record.save(err => {
+        if (err) return console.error(err)
+        res.redirect('/')
+      })
     })
-  })
+  }
 })
 
 route.delete('/:id/delete', authenticated, (req, res) => {
