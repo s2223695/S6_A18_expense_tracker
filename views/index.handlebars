@@ -37,12 +37,36 @@
       </div>
       <div class="col-auto">
         <a href="/records/{{this.id}}/edit" class="btn btn-success">修改</a>
-        <form action="/records/{{this.id}}/delete?_method=DELETE" method="post" style="display: inline-block;">
-          <button type="submit" class="btn btn-danger">刪除</button>
-        </form>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#deleteCheckModal">
+          刪除
+        </button>
       </div>
     </div>
   </li>
+  <!-- Modal -->
+  <div class="modal fade" id="deleteCheckModal" tabindex="-1" role="dialog" aria-labelledby="deleteCheckModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteCheckModalLabel">刪除確認</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          確認要刪除嗎?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <form action="/records/{{this.id}}/delete?_method=DELETE" method="post" style="display: inline;">
+            <button type="submit" class="btn btn-danger mx-1">刪除</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   {{/each}}
 </ul>
 
