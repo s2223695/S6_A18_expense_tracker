@@ -7,7 +7,16 @@ const { authenticated } = require('../config/auth')
 const { Record, categoryInfo } = require('../models/record')
 
 route.get('/', authenticated, (req, res) => {
-  Record.find({ userId: req.user._id })
+  let filterCategory = req.query.filter
+
+  let query = { userId: req.user._id }
+  if (filterCategory in categoryInfo) {
+    query.category = filterCategory
+  } else {
+    filterCategory = 'none'
+  }
+
+  Record.find(query)
     .sort({ name: 'asc' })
     .exec((err, records) => {
       if (err) console.error(err)
@@ -17,7 +26,13 @@ route.get('/', authenticated, (req, res) => {
         totalAmount += record.totalAmount
         return record
       })
-      res.render('index', { totalAmount, records: formatedRecords })
+      let category = JSON.parse(JSON.stringify(categoryInfo))
+      category.none = {
+        label: '過濾類別...',
+        icon: ''
+      }
+      categorySel = category[filterCategory].label
+      res.render('index', { categorySel, category, totalAmount, records: formatedRecords })
     })
 })
 

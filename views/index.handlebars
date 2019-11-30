@@ -1,3 +1,16 @@
+<div class="row justify-content-end mb-3">
+  <div class="col-auto">
+    <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      {{categorySel}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {{#each category}}
+      <a class="dropdown-item" href="/records?filter={{@key}}">{{this.label}}</a>
+      {{/each}}
+    </div>
+  </div>
+</div>
 <ul class="list-group">
   <li class="list-group-item bg-light">
     <div class="row align-items-center justify-content-center">
