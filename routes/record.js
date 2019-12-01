@@ -19,9 +19,11 @@ function checkRecordInput(recordInput, errors) {
 }
 
 route.get('/', authenticated, (req, res) => {
-  let filterCategory = req.query.filter
+  let filterCategory = req.query.category
+  let filterMonth = req.query.month
+  const regexFilterMonth = new RegExp(filterMonth)
 
-  let query = { userId: req.user._id }
+  let query = { userId: req.user._id, date: regexFilterMonth }
   if (filterCategory in categoryInfo) {
     query.category = filterCategory
   } else {
@@ -43,8 +45,8 @@ route.get('/', authenticated, (req, res) => {
         label: '過濾類別...',
         icon: ''
       }
-      categorySel = category[filterCategory].label
-      res.render('index', { categorySel, category, totalAmount, records: formatedRecords })
+      category[filterCategory].selected = true
+      res.render('index', { filterMonth, category, totalAmount, records: formatedRecords })
     })
 })
 
