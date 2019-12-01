@@ -5,7 +5,7 @@ This is a web app to record expense data which is based on express,js.
 + User can register an account
 + User can login with Facebook
 + Show user's expense record list and total amount at index page with basic data.
-+ User can choose category filter to filter expense records.
++ User can choose category and month filter to filter expense records.
 + User can add new expense record.
 + User can edit data of exist expense record.
 + User can delete expense record from record list.
@@ -34,11 +34,11 @@ This is a web app to record expense data which is based on express,js.
 Choose a [dir] as a workspace.
 First, clone this project to the [dir].
 ```
-git clone https://github.com/s2223695/S6_A17_expense_tracker.git [dir]
+git clone https://github.com/s2223695/S6_A18_expense_tracker.git [dir]
 ```
 Switch to the project folder.
 ```
-cd S6_A17_expense_tracker/
+cd S6_A18_expense_tracker/
 ```
 Install the modules.
 ```
