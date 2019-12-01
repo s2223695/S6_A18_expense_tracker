@@ -34,11 +34,11 @@ This is a web app to record expense data which is based on express,js.
 Choose a [dir] as a workspace.
 First, clone this project to the [dir].
 ```
-git clone https://github.com/s2223695/S6_17_expense_tracker.git [dir]
+git clone https://github.com/s2223695/S6_A17_expense_tracker.git [dir]
 ```
 Switch to the project folder.
 ```
-cd S6_17_expense_tracker/
+cd S6_A17_expense_tracker/
 ```
 Install the modules.
 ```
