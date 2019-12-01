@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Setting database
-mongoose.connect('mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/expense_tracker', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 const db = mongoose.connection
 
 db.on('error', () => {
@@ -72,6 +72,6 @@ app.use('/users', require('./routes/user'))
 app.use('/auth', require('./routes/auths'))
 
 // Start listening on port
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log('Express start listening')
 })
