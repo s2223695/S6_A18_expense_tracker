@@ -67,6 +67,7 @@ route.post('/new', authenticated, (req, res) => {
   } else {
     const record = new Record({
       name: recordInput.name,
+      merchant: recordInput.merchant,
       category: recordInput.category,
       date: recordInput.date,
       amount: recordInput.amount,

@@ -30,6 +30,9 @@ const recordSchema = new Schema({
     type: String,
     required: true
   },
+  merchant: {
+    type: String,
+  },
   category: {
     type: String,
     enum: enumCategory,
