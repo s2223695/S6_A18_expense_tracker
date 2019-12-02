@@ -104,6 +104,7 @@ route.put('/:id', authenticated, (req, res) => {
     Record.findOne({ _id: req.params.id, userId: req.user._id }, (err, record) => {
       if (err) return console.error(err)
       Object.assign(record, recordInput)
+      record.totalAmount = recordInput.amount
       record.save(err => {
         if (err) return console.error(err)
         res.redirect('/')
