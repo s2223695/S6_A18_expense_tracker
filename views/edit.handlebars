@@ -19,7 +19,8 @@
         <div class="input-group-prepend">
           <label class="input-group-text" for="date">日期*</label>
         </div>
-        <input type="date" name="date" id="date" class="form-control" value="{{record.date}}" required>
+        <input type="date" name="date" id="date" class="form-control" value="{{moment record.date format="YYYY-MM-DD"}}"
+          required>
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">

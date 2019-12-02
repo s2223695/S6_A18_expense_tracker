@@ -21,13 +21,19 @@ function checkRecordInput(recordInput, errors) {
 route.get('/', authenticated, (req, res) => {
   let filterCategory = req.query.category
   let filterMonth = req.query.month
-  const regexFilterMonth = new RegExp(filterMonth)
 
-  let query = { userId: req.user._id, date: regexFilterMonth }
+  let query = { userId: req.user._id }
   if (filterCategory in categoryInfo) {
     query.category = filterCategory
   } else {
     filterCategory = 'none'
+  }
+
+  if (filterMonth) {
+    query.date = {
+      $gte: new Date(`${filterMonth}-1`),
+      $lte: new Date(`${filterMonth}-31`)
+    }
   }
 
   Record.find(query)
